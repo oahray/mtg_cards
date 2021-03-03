@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'pry'
+require 'mtg_cards'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: mtg_cards [options]'
+  opts.on('-f', '--filter FILTER', Array, "Card filters: [set, set_rarity, ktk, all]. For example, $ bin/mtg_cards -f set") do |filter|
+    options[:filter] = filter
+  end
+end.parse!
+
+MtgCards::CLI.new(options).call
